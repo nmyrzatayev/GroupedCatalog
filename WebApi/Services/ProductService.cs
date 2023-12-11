@@ -46,11 +46,11 @@ namespace WebApi.Services
                             productImportDto.Price = Convert.ToDecimal(worksheet.Cells[i, 3].Value?.ToString() ?? throw new Exception("3"));
                             productImportDto.Quantity = Convert.ToInt32(worksheet.Cells[i, 4].Value?.ToString() ?? throw new Exception("4"));
                             var product = _mapper.Map<Product>(productImportDto);
-
-                            var existProduct = await _productRepository.GetByName(productImportDto.Name);
+                            var products = await _productRepository.GetAll();
+                            var existProduct = products.FirstOrDefault(p=>p.Name.ToLower() == productImportDto.Name.ToLower());
                             if (existProduct is null)
                             {
-                                await _productRepository.AddProduct(product);
+                                await _productRepository.Add(product);
                             }
                             else
                             {
