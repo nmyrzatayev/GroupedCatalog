@@ -17,5 +17,5 @@ WebApi.Services.GroupsGeneratingService: BackgroundService
 
 5) Новые группы и содержимое групп можно посмотреть черещ swagger
 ```
-
+/swagger/index.html
 ```
